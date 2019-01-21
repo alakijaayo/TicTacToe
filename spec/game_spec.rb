@@ -26,8 +26,24 @@ describe Game do
   it "should receive and store answer from player 2" do
     input = StringIO.new("TR\n")
     output = StringIO.new
-    game = Game.new(input: test_input, output: test_output)
+    game = Game.new(input: input, output: output)
     expect(game.player_2_move).to eq(["TR"])
+  end
+
+  it "should show player 1 as winner" do
+    subject.player1 = ["TL", "TR", "TC"]
+    expect(subject.winner).to eq("Player 1 Wins")
+  end
+
+  it "should show player 2 as winner" do
+    subject.player2 = ["MC", "MR", "ML"]
+    expect(subject.winner).to eq("Player 2 Wins")
+  end
+
+  it "should produce a draw" do
+    subject.player1 = ["TL", "MR", "MC"]
+    subject.player2 = ["TC", "BL", "ML"]
+    expect(subject.winner).to eq("It's a Draw")
   end
 
 end

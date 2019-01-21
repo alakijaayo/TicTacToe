@@ -11,6 +11,8 @@ class Game
     ["TC", "TL", "TR"]
   ]
 
+attr_accessor :player1, :player2
+
   def initialize(output: $stdout, input: $stdin)
     @output = output
     @input = input
