@@ -32,18 +32,12 @@ describe Game do
 
   it "should show player 1 as winner" do
     subject.player1 = ["TL", "TR", "TC"]
-    expect(subject.winner).to eq("Player 1 Wins")
+    expect(subject.winner).to eq(true)
   end
 
   it "should show player 2 as winner" do
     subject.player2 = ["MC", "MR", "ML"]
-    expect(subject.winner).to eq("Player 2 Wins")
-  end
-
-  it "should produce a draw" do
-    subject.player1 = ["TL", "MR", "MC"]
-    subject.player2 = ["TC", "BL", "ML"]
-    expect(subject.winner).to eq("It's a Draw")
+    expect(subject.winner).to eq(true)
   end
 
 end

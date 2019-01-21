@@ -18,6 +18,7 @@ attr_accessor :player1, :player2
     @input = input
     @player1 = []
     @player2 = []
+    @gameover = false
   end
 
   def player_1_move
@@ -42,9 +43,27 @@ attr_accessor :player1, :player2
     end
   end
 
-  def winner
-    WIN_OPTIONS.include?(@player1[0..2].sort) ? "Player 1 Wins" : WIN_OPTIONS.include?(@player2[0..2].sort) ? "Player 2 Wins" : "It's a Draw"
+  def run
+    i = 0
+    loop do
+      i += 1
+      player_1_move
+      self.winner
+      return "Player 1 Wins" if @gameover == true
+      return "It's a Draw" if i == 9 && @gameover == false
+      i += 1
+      player_2_move
+      self.winner
+      return "Player 2 Wins" if @gameover == true
+    end
   end
 
+  def winner
+    if WIN_OPTIONS.include?(@player1[0..2].sort)
+      @gameover = true
+    elsif WIN_OPTIONS.include?(@player2[0..2].sort)
+      @gameover = true
+    end
+  end
 
 end
