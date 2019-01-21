@@ -11,21 +11,33 @@ class Game
     ["TC", "TL", "TR"]
   ]
 
-  def initialize
+  def initialize(output: $stdout, input: $stdin)
+    @output = output
+    @input = input
     @player1 = []
     @player2 = []
   end
 
   def player_1_move
-    puts "Player 1, choose your position:"
-    answer = gets.chomp.upcase
-    @player1.push(answer)
+    @output.puts "Player 1, choose your position:"
+    answer = @input.gets.chomp.upcase
+    if @player1.include?(answer) || @player2.include?(answer)
+      puts "That space is already taken."
+      self.player_1_move
+    else
+      @player1.push(answer)
+    end
   end
 
   def player_2_move
-    puts "Player 2, choose your position:"
-    answer2 = gets.chomp.upcase
-    @player2.push(answer2)
+    @output.puts "Player 2, choose your position:"
+    answer2 = @input.gets.chomp.upcase
+    if @player1.include?(answer2) || @player2.include?(answer2)
+      puts "That space is already taken."
+      self.player_2_move
+    else
+      @player2.push(answer2)
+    end
   end
 
   def winner
