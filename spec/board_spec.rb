@@ -22,7 +22,13 @@ describe Board do
   it "informs you if a position is not available" do
     subject.choices["TL"] = "X"
     expect(subject.available?("TL")).to eq(false)
+  end
 
+  it "gives us a winner" do
+    subject.choices["TL"] = "X"
+    subject.choices["TC"] = "X"
+    subject.choices["TR"] = "X"
+    expect(subject.winner).to eq("Player 1 Wins!")
   end
 
 end
