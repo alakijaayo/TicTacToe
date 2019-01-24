@@ -22,3 +22,16 @@ To start the game:
 - Open `irb` and type `require './lib/game'`
 - Choose whatever instance and make it equal to Game. For Example, `game = Game.new`
 - Put your instance with .run to start. For Example, `game.run`
+
+## Challenges Faced
+
+Some of the challenges I faced included:
+
+- How to print the board
+- Storing the positions of the players using "X" and "O" and putting them on the board
+- Looping the questions without it being too bulky
+- Learning to test using StringIO
+
+## Overall Thoughts
+
+This was a nice challenge and an interesting one to get back into after taking a step away from Ruby for a while. I had at first managed to get this done with just one class but was not happy with how bulky it looked, so this has been my attempt to break it down into separate classes and add a board to the game which shows the players where they have played. Am still going to come back to this challenge as I want to build it into a game where players can use it online and pick their positions that way. Happy with this overall build at the current moment in time.
