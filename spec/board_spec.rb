@@ -28,7 +28,8 @@ describe Board do
     subject.choices["TL"] = "X"
     subject.choices["TC"] = "X"
     subject.choices["TR"] = "X"
-    expect(subject.winner).to eq("Player 1 Wins!")
+    subject.winner
+    expect(subject.game).to eq(true)
   end
 
 end

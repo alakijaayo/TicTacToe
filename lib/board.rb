@@ -1,8 +1,10 @@
 class Board
 
-  attr_accessor :choices
+  attr_reader :choices, :game
+
 
   def initialize(output: $stdout, input: $stdin)
+    @game = false
     @input = input
     @output = output
     @choices = {
@@ -61,11 +63,9 @@ class Board
   def winner
     win_options.each do |combos|
       if combos[0] == "X" && combos[1] == "X" && combos[2] == "X"
-        return "Player 1 Wins!"
-        exit
-      elsif combos[0] == "O" && combos[2] == "O" && combos[2] == "O"
-        return "Player 2 Wins!"
-        exit
+        @game = true
+      elsif combos[0] == "O" && combos[1] == "O" && combos[2] == "O"
+        @game = true
       end
     end
   end

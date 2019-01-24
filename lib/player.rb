@@ -2,26 +2,21 @@ require './lib/board'
 
 class Player
 
-attr_accessor :choices
+  attr_reader :board
 
   def initialize(output: $stdout, input: $stdin)
+    @board = Board.new
     @output = output
     @input = input
-    @choices = []
   end
 
-  def move
-    @output.puts "Choose your position:"
-    answer = @input.gets.chomp.upcase
-    if @choices.include?(answer)
-      self.repeat
-      self.move
-    else
-      @choices.push(answer)
-    end
+  def move_x(answer)
+    @board.user_choice(answer, "X")
+    return "Player 1 Wins!" if @board.game == true
   end
 
-  def repeat
-    @output.puts "That space is already taken."
+  def move_o(answer)
+    @board.user_choice(answer, "O")
+    return "Player 2 Wins!" if @board.game == true
   end
 end
