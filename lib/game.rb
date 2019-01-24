@@ -1,68 +1,43 @@
+require './lib/player'
+
 class Game
-
-  WIN_OPTIONS = [
-    ["BC", "BL", "BR"],
-    ["BC", "MC", "TC"],
-    ["BL", "MC", "TR"],
-    ["BL", "ML", "TL"],
-    ["BR", "MC", "TL"],
-    ["BR", "MR", "TR"],
-    ["MC", "ML", "MR"],
-    ["TC", "TL", "TR"]
-  ]
-
-attr_accessor :player1, :player2
 
   def initialize(output: $stdout, input: $stdin)
     @output = output
     @input = input
-    @player1 = []
-    @player2 = []
-    @gameover = false
+    @player = Player.new
+  end
+
+  def start_game
+    @output.puts "Welcome to Tic Tac Toe/Noughts and Crosses!"
+    @output.puts "This is a two player game, so hope you have a friend."
+    @output.puts "To pick a square, please put the initials. For example, bottom left will be 'BL'"
+    @output.puts "Let's begin!"
   end
 
   def player_1_move
     @output.puts "Player 1, choose your position:"
     answer = @input.gets.chomp.upcase
-    if @player1.include?(answer) || @player2.include?(answer)
-      puts "That space is already taken."
-      self.player_1_move
-    else
-      @player1.push(answer)
-    end
+    @player.move_x(answer)
   end
 
   def player_2_move
     @output.puts "Player 2, choose your position:"
     answer2 = @input.gets.chomp.upcase
-    if @player1.include?(answer2) || @player2.include?(answer2)
-      puts "That space is already taken."
-      self.player_2_move
-    else
-      @player2.push(answer2)
-    end
+    @player.move_o(answer2)
   end
 
   def run
+    start_game
     i = 0
-    loop do
-      i += 1
+    while true do
       player_1_move
-      self.winner
-      return "Player 1 Wins" if @gameover == true
-      return "It's a Draw" if i == 9 && @gameover == false
       i += 1
+      return "Player 1 Wins!" if @player.board.game == true
+      return "It's a Draw" if i == 9
       player_2_move
-      self.winner
-      return "Player 2 Wins" if @gameover == true
-    end
-  end
-
-  def winner
-    if WIN_OPTIONS.include?(@player1[0..2].sort)
-      @gameover = true
-    elsif WIN_OPTIONS.include?(@player2[0..2].sort)
-      @gameover = true
+      i += 1
+      return "Player 2 Wins" if @player.board.game == true
     end
   end
 

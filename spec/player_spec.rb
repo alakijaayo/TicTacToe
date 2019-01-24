@@ -9,8 +9,8 @@ describe Player do
   end
 
   it "informs Player 2 wins" do
-    subject.move_o("TC")
-    subject.move_o("TR")
-    expect(subject.move_o("TL")).to eq("Player 2 Wins!")
+    subject.move_o("BC")
+    subject.move_o("BR")
+    expect(subject.move_o("BL")).to eq("Player 2 Wins!")
   end
 end

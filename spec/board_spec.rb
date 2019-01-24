@@ -11,12 +11,12 @@ describe Board do
   end
 
   it "takes user choice and changes position" do
-    subject.user_choice("TL", "X")
-    expect(subject.choices["TL"]).to eq("X")
+    subject.user_choice("BL", "X")
+    expect(subject.choices["BL"]).to eq("X")
   end
 
   it "checks if a position is available" do
-    expect(subject.available?("TL")).to eq(true)
+    expect(subject.available?("ML")).to eq(true)
   end
 
   it "informs you if a position is not available" do
